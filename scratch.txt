@@ -70,3 +70,11 @@
 
 
 (d/transact conn schema)
+
+https://github.com/cemerick/friend
+http://docs.datomic.com/identity.html
+https://github.com/Datomic/day-of-datomic/blob/98c1d9b2967ad5317e83b6da50f7c0e5c3d7a207/tutorial/constructor.clj
+https://github.com/Datomic/day-of-datomic/blob/98c1d9b2967ad5317e83b6da50f7c0e5c3d7a207/tutorial/pull_recursion.clj
+http://docs.datomic.com/clojure/
+https://github.com/Datomic/day-of-datomic/blob/98c1d9b2967ad5317e83b6da50f7c0e5c3d7a207/tutorial/building_queries.clj
+http://aan.io/datomic-n00biness/
