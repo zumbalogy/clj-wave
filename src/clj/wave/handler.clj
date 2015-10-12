@@ -6,7 +6,15 @@
             [hiccup.page :refer [include-js include-css]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
+            [datomic.api :as d]
             [environ.core :refer [env]]))
+
+
+(def uri "datomic:free://localhost:4334/wave")
+(db/create-database uri)
+(def conn (db/connect uri))
+(def db (d/db conn))
+
 
 (def home-page
   (html

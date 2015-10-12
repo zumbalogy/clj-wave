@@ -1,0 +1,72 @@
+(let [id (db/tempid :db.part/user)
+      doc "Example 2"
+      name "bob"]
+  (db/transact conn [{:db/id id :db/doc doc}]))
+
+
+(d/q '[:find [?e ...]
+       :in $ ?name
+       :where [?e :user/firstName ?name]]
+     db
+     "Stewart")
+
+
+
+(db/transact conn [{:db/id #db/id [:db.part/user]
+                  :user/firstName "Stewart"
+                  :user/lastName "Brand"}
+                 {:db/id #db/id [:db.part/user]
+                  :user/firstName "John"
+                  :user/lastName "Stewart"}
+                 {:db/id #db/id [:db.part/user]
+                  :user/firstName "Stuart"
+                  :user/lastName "Smalley"}
+                 {:db/id #db/id [:db.part/user]
+                  :user/firstName "Stuart"
+                  :user/lastName "Halloway"}])
+
+
+(def schema [{:db/id #db/id [:db.part/db]
+              :db/ident :user/firstName
+              :db/valueType :db.type/string
+              :db/cardinality :db.cardinality/one
+              :db/index true
+              :db.install/_attribute :db.part/db}
+             {:db/id #db/id [:db.part/db]
+              :db/ident :user/lastName
+              :db/valueType :db.type/string
+              :db/cardinality :db.cardinality/one
+              :db/index true
+              :db.install/_attribute :db.part/db}
+             {:db/id #db/id [:db.part/db]
+              :db/ident :user/token
+              :db/valueType :db.type/string
+              :db/cardinality :db.cardinality/one
+              :db/index true
+              :db.install/_attribute :db.part/db}])
+
+(def schema [{:db/id #db/id [:db.part/db]
+              :db/ident :user/name
+              :db/valueType :db.type/string
+              :db/cardinality :db.cardinality/one
+              :db/index true
+              :db.install/_attribute :db.part/db}
+             {:db/id #db/id [:db.part/db]
+              :db/ident :user/email
+              db/unique :db.unique/identity
+              :db/valueType :db.type/string
+              :db/cardinality :db.cardinality/one
+              :db/index true
+              :db.install/_attribute :db.part/db}
+              {:db/id #db/id [:db.part/db]
+               :db/ident :user/email
+               db/unique :db.unique/identity
+               :db/valueType :db.type/string
+               :db/cardinality :db.cardinality/one
+               :db/index true
+               :db.install/_attribute :db.part/db}
+             ])
+
+
+
+(d/transact conn schema)
